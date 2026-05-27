@@ -1,0 +1,9 @@
+[workspace]
+members = [
+    "app",
+    "application",
+    "infrastructure",
+    "domain"
+]
+
+resolver = "2"
