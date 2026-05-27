@@ -13,7 +13,7 @@ impl Cli {
     }
 }
 
-#[derive(Subcommand)]
+#[derive(Debug, Subcommand)]
 pub(crate) enum Commands {
     /// Initialize the application
     Init {
@@ -33,9 +33,12 @@ pub(crate) enum Commands {
         #[arg(value_enum)]
         target: DeleteTarget,
     },
+
+    /// Start the FlowPilot Telegram bot
+    Start,
 }
 
-#[derive(Clone, ValueEnum)]
+#[derive(Clone, Debug, ValueEnum)]
 pub(crate) enum DeleteTarget {
     /// Delete all application data
     All,

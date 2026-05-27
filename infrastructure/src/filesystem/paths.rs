@@ -8,6 +8,7 @@ use crate::filesystem::error::PathsError;
 pub struct Paths {
     root: PathBuf,
     config: PathBuf,
+    logs: PathBuf,
 }
 
 impl Paths {
@@ -19,16 +20,22 @@ impl Paths {
         &self.config
     }
 
+    pub fn logs(&self) -> &PathBuf {
+        &self.logs
+    }
+
     pub fn load() -> Result<Self, PathsError> {
         let project_dirs = ProjectDirs::from("com", "enzoblain", "FlowPilot")
             .ok_or(PathsError::ProjectDirsNotFound)?;
 
         let root = project_dirs.data_dir().to_path_buf();
         let config = root.join("config.json");
+        let logs = root.join("logs");
 
         fs::create_dir_all(&root).map_err(|_| PathsError::RootDirectoryCreationFailed)?;
+        fs::create_dir_all(&logs).map_err(|_| PathsError::RootDirectoryCreationFailed)?;
 
-        Ok(Self { root, config })
+        Ok(Self { root, config, logs })
     }
 
     pub fn config_exists(&self) -> bool {
