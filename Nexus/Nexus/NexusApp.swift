@@ -1,15 +1,15 @@
 //
-//  nexusApp.swift
-//  nexus
+//  NexusApp.swift
+//  Nexus
 //
-//  Created by Enzo Blain on 29/05/2026.
+//  Created by Enzo Blain on 03/06/2026.
 //
 
 import SwiftUI
 import SwiftData
 
 @main
-struct nexusApp: App {
+struct NexusApp: App {
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             Item.self,

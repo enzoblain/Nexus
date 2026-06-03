@@ -7,6 +7,8 @@ cd "$(dirname "$0")/.."
 CRATE_NAME="bindings"
 LIB_NAME="bindings"
 
+OUTPUT_DIR="Nexus/Packages/NexusRust/Frameworks"
+
 rustup target add \
   aarch64-apple-ios \
   aarch64-apple-ios-sim \
@@ -36,8 +38,34 @@ xcodebuild -create-xcframework \
   -headers crates/bindings/include \
   -output Nexus.xcframework
 
-mkdir -p apps/nexus/Frameworks
+mkdir -p "$OUTPUT_DIR"
 
-rm -rf apps/nexus/Frameworks/Nexus.xcframework
+cat > "$(dirname "$OUTPUT_DIR")/Package.swift" << 'EOF'
+// swift-tools-version: 5.9
 
-mv Nexus.xcframework apps/nexus/Frameworks/
+import PackageDescription
+
+let package = Package(
+    name: "NexusRust",
+    platforms: [
+        .iOS(.v16),
+        .macOS(.v14)
+    ],
+    products: [
+        .library(
+            name: "NexusRust",
+            targets: ["NexusRust"]
+        )
+    ],
+    targets: [
+        .binaryTarget(
+            name: "NexusRust",
+            path: "Frameworks/Nexus.xcframework"
+        )
+    ]
+)
+EOF
+
+rm -rf "$OUTPUT_DIR/Nexus.xcframework"
+
+mv Nexus.xcframework "$OUTPUT_DIR/"

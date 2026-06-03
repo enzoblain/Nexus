@@ -1,8 +1,8 @@
 //
 //  ContentView.swift
-//  nexus
+//  Nexus
 //
-//  Created by Enzo Blain on 29/05/2026.
+//  Created by Enzo Blain on 03/06/2026.
 //
 
 import SwiftUI

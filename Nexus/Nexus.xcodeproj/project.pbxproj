@@ -6,41 +6,46 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		8DCF63352FD070F100ED0F15 /* NexusRust in Frameworks */ = {isa = PBXBuildFile; productRef = 8DCF63342FD070F100ED0F15 /* NexusRust */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
-		8D86EC492FC9CD6800DE6379 /* nexus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = nexus.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8DCF63232FD0667E00ED0F15 /* Nexus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Nexus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		8D86EC4B2FC9CD6800DE6379 /* nexus */ = {
+		8DCF63252FD0667E00ED0F15 /* Nexus */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = nexus;
+			path = Nexus;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		8D86EC462FC9CD6800DE6379 /* Frameworks */ = {
+		8DCF63202FD0667E00ED0F15 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8DCF63352FD070F100ED0F15 /* NexusRust in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		8D86EC402FC9CD6800DE6379 = {
+		8DCF631A2FD0667E00ED0F15 = {
 			isa = PBXGroup;
 			children = (
-				8D86EC4B2FC9CD6800DE6379 /* nexus */,
-				8D86EC4A2FC9CD6800DE6379 /* Products */,
+				8DCF63252FD0667E00ED0F15 /* Nexus */,
+				8DCF63242FD0667E00ED0F15 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		8D86EC4A2FC9CD6800DE6379 /* Products */ = {
+		8DCF63242FD0667E00ED0F15 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8D86EC492FC9CD6800DE6379 /* nexus.app */,
+				8DCF63232FD0667E00ED0F15 /* Nexus.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -48,64 +53,68 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		8D86EC482FC9CD6800DE6379 /* nexus */ = {
+		8DCF63222FD0667E00ED0F15 /* Nexus */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8D86EC562FC9CD6B00DE6379 /* Build configuration list for PBXNativeTarget "nexus" */;
+			buildConfigurationList = 8DCF63302FD0668100ED0F15 /* Build configuration list for PBXNativeTarget "Nexus" */;
 			buildPhases = (
-				8D86EC452FC9CD6800DE6379 /* Sources */,
-				8D86EC462FC9CD6800DE6379 /* Frameworks */,
-				8D86EC472FC9CD6800DE6379 /* Resources */,
+				8DCF631F2FD0667E00ED0F15 /* Sources */,
+				8DCF63202FD0667E00ED0F15 /* Frameworks */,
+				8DCF63212FD0667E00ED0F15 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				8D86EC4B2FC9CD6800DE6379 /* nexus */,
+				8DCF63252FD0667E00ED0F15 /* Nexus */,
 			);
-			name = nexus;
+			name = Nexus;
 			packageProductDependencies = (
+				8DCF63342FD070F100ED0F15 /* NexusRust */,
 			);
-			productName = nexus;
-			productReference = 8D86EC492FC9CD6800DE6379 /* nexus.app */;
+			productName = Nexus;
+			productReference = 8DCF63232FD0667E00ED0F15 /* Nexus.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		8D86EC412FC9CD6800DE6379 /* Project object */ = {
+		8DCF631B2FD0667E00ED0F15 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 2650;
 				LastUpgradeCheck = 2650;
 				TargetAttributes = {
-					8D86EC482FC9CD6800DE6379 = {
+					8DCF63222FD0667E00ED0F15 = {
 						CreatedOnToolsVersion = 26.5;
 					};
 				};
 			};
-			buildConfigurationList = 8D86EC442FC9CD6800DE6379 /* Build configuration list for PBXProject "nexus" */;
+			buildConfigurationList = 8DCF631E2FD0667E00ED0F15 /* Build configuration list for PBXProject "Nexus" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
 			);
-			mainGroup = 8D86EC402FC9CD6800DE6379;
+			mainGroup = 8DCF631A2FD0667E00ED0F15;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				8DCF63332FD070F100ED0F15 /* XCLocalSwiftPackageReference "Packages/NexusRust" */,
+			);
 			preferredProjectObjectVersion = 77;
-			productRefGroup = 8D86EC4A2FC9CD6800DE6379 /* Products */;
+			productRefGroup = 8DCF63242FD0667E00ED0F15 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8D86EC482FC9CD6800DE6379 /* nexus */,
+				8DCF63222FD0667E00ED0F15 /* Nexus */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		8D86EC472FC9CD6800DE6379 /* Resources */ = {
+		8DCF63212FD0667E00ED0F15 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -115,7 +124,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		8D86EC452FC9CD6800DE6379 /* Sources */ = {
+		8DCF631F2FD0667E00ED0F15 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -125,7 +134,7 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		8D86EC542FC9CD6B00DE6379 /* Debug */ = {
+		8DCF632E2FD0668100ED0F15 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -187,7 +196,7 @@
 			};
 			name = Debug;
 		};
-		8D86EC552FC9CD6B00DE6379 /* Release */ = {
+		8DCF632F2FD0668100ED0F15 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -241,7 +250,7 @@
 			};
 			name = Release;
 		};
-		8D86EC572FC9CD6B00DE6379 /* Debug */ = {
+		8DCF63312FD0668100ED0F15 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -269,7 +278,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 26.5;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = enzoblain.nexus;
+				PRODUCT_BUNDLE_IDENTIFIER = enzoblain.Nexus;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
 				SDKROOT = auto;
@@ -285,7 +294,7 @@
 			};
 			name = Debug;
 		};
-		8D86EC582FC9CD6B00DE6379 /* Release */ = {
+		8DCF63322FD0668100ED0F15 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -313,7 +322,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 26.5;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = enzoblain.nexus;
+				PRODUCT_BUNDLE_IDENTIFIER = enzoblain.Nexus;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
 				SDKROOT = auto;
@@ -332,25 +341,39 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		8D86EC442FC9CD6800DE6379 /* Build configuration list for PBXProject "nexus" */ = {
+		8DCF631E2FD0667E00ED0F15 /* Build configuration list for PBXProject "Nexus" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				8D86EC542FC9CD6B00DE6379 /* Debug */,
-				8D86EC552FC9CD6B00DE6379 /* Release */,
+				8DCF632E2FD0668100ED0F15 /* Debug */,
+				8DCF632F2FD0668100ED0F15 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8D86EC562FC9CD6B00DE6379 /* Build configuration list for PBXNativeTarget "nexus" */ = {
+		8DCF63302FD0668100ED0F15 /* Build configuration list for PBXNativeTarget "Nexus" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				8D86EC572FC9CD6B00DE6379 /* Debug */,
-				8D86EC582FC9CD6B00DE6379 /* Release */,
+				8DCF63312FD0668100ED0F15 /* Debug */,
+				8DCF63322FD0668100ED0F15 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		8DCF63332FD070F100ED0F15 /* XCLocalSwiftPackageReference "Packages/NexusRust" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = Packages/NexusRust;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8DCF63342FD070F100ED0F15 /* NexusRust */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = NexusRust;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
-	rootObject = 8D86EC412FC9CD6800DE6379 /* Project object */;
+	rootObject = 8DCF631B2FD0667E00ED0F15 /* Project object */;
 }
