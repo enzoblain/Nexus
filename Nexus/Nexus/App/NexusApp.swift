@@ -67,5 +67,6 @@ struct NexusApp: App {
             }
             #endif
         }
+        .windowStyle(.hiddenTitleBar)
     }
 }

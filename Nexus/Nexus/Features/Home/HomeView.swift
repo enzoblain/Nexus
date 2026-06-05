@@ -19,7 +19,15 @@ struct HomeView: View {
             }
                 .font(.largeTitle)
                 .fontWeight(.bold)
-                .pointerStyle(.link)
+                #if os(macOS)
+                .onHover { hovering in
+                    if hovering {
+                        NSCursor.pointingHand.push()
+                    } else {
+                        NSCursor.pop()
+                    }
+                }
+                #endif
 
             Text("Powered by Rust")
                 .foregroundStyle(.secondary)

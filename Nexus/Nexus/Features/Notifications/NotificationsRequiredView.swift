@@ -23,7 +23,15 @@ struct NotificationsRequiredView: View {
                 }
             }
             .buttonStyle(.borderedProminent)
-            .pointerStyle(.link)
+            #if os(macOS)
+            .onHover { hovering in
+                if hovering {
+                    NSCursor.pointingHand.push()
+                } else {
+                    NSCursor.pop()
+                }
+            }
+            #endif
         }
         .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
