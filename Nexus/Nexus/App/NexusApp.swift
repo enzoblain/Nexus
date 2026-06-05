@@ -9,10 +9,19 @@ struct NexusApp: App {
     @Environment(\.scenePhase)
     private var scenePhase
 
+    private var shouldRequireNotifications: Bool {
+        #if os(macOS)
+            settings.accountType == .server
+        #else
+            false
+        #endif
+    }
+
     var body: some Scene {
         WindowGroup {
             Group {
-                if settings.notificationsStatus == .refused {
+                if shouldRequireNotifications &&
+                    settings.notificationsStatus == .refused {
                     NotificationsRequiredView()
                 } else {
                     RootView()
@@ -20,6 +29,8 @@ struct NexusApp: App {
             }
             .environmentObject(settings)
             .task {
+                guard shouldRequireNotifications else { return }
+
                 await settings.refreshNotificationsStatus()
 
                 if settings.notificationsStatus == .notDetermined {
@@ -34,21 +45,27 @@ struct NexusApp: App {
                 }
             }
             .onChange(of: scenePhase) { _, newPhase in
+                guard shouldRequireNotifications else { return }
+
                 if newPhase == .active {
                     Task {
                         await settings.refreshNotificationsStatus()
                     }
                 }
             }
+            #if os(macOS)
             .onReceive(
                 NotificationCenter.default.publisher(
                     for: NSApplication.didBecomeActiveNotification
                 )
             ) { _ in
+                guard shouldRequireNotifications else { return }
+
                 Task {
                     await settings.refreshNotificationsStatus()
                 }
             }
+            #endif
         }
     }
 }
