@@ -7,7 +7,7 @@ final class AppSettings: ObservableObject {
     private var rawAccountType = AccountType.undefined.rawValue
 
     @Published
-    private(set) var notificationsStatus: NotificationsStatus = .notDetermined
+    private(set) var notificationsStatus: NotificationsStatus = .undefined
 
     var accountType: AccountType {
         get { AccountType(rawValue: rawAccountType) ?? .undefined }
@@ -15,22 +15,8 @@ final class AppSettings: ObservableObject {
     }
 
     @MainActor
-    func refreshNotificationsStatus() async {
-        let settings = await UNUserNotificationCenter.current()
-            .notificationSettings()
-
-        switch settings.authorizationStatus {
-        case .authorized, .provisional, .ephemeral:
-            notificationsStatus = .accepted
-
-        case .denied:
-            notificationsStatus = .refused
-
-        case .notDetermined:
-            notificationsStatus = .notDetermined
-
-        @unknown default:
-            notificationsStatus = .refused
+        func refreshNotificationsStatus() async {
+            notificationsStatus = await NotificationManager.shared
+                .authorizationStatus()
         }
-    }
 }

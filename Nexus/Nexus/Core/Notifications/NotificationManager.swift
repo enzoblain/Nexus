@@ -1,3 +1,4 @@
+import OSLog
 import UserNotifications
 
 final class NotificationManager {
@@ -5,9 +6,37 @@ final class NotificationManager {
 
     private init() {}
 
-    func requestAuthorization() async throws -> Bool {
-        try await UNUserNotificationCenter.current()
-            .requestAuthorization(options: [.alert, .badge, .sound])
+    func authorizationStatus() async -> NotificationsStatus {
+        let settings = await UNUserNotificationCenter.current()
+            .notificationSettings()
+
+        switch settings.authorizationStatus {
+        case .authorized, .provisional, .ephemeral:
+            return .accepted
+
+        case .denied:
+            return .refused
+
+        case .notDetermined:
+            return .undefined
+
+        @unknown default:
+            return .refused
+        }
+    }
+
+    func requestAuthorization() async throws {
+        do {
+            try await UNUserNotificationCenter.current()
+                .requestAuthorization(options: [.alert, .badge, .sound])
+        } catch {
+            Logger(
+                subsystem: Bundle.main.bundleIdentifier ?? "Nexus",
+                category: "notifications"
+            ).error("Failed to request authorization: \(error.localizedDescription)")
+
+            throw error
+        }
     }
 
     func send(_ type: NotificationType) async throws {
@@ -25,7 +54,16 @@ final class NotificationManager {
             trigger: nil
         )
 
-        try await UNUserNotificationCenter.current()
-            .add(request)
+        do {
+            try await UNUserNotificationCenter.current()
+                .add(request)
+        } catch {
+            Logger(
+                subsystem: Bundle.main.bundleIdentifier ?? "Nexus",
+                category: "notifications"
+            ).error("Failed to send notification: \(error.localizedDescription)")
+
+            throw error
+        }
     }
 }

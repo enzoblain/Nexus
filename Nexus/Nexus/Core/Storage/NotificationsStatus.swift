@@ -1,5 +1,5 @@
 enum NotificationsStatus {
-    case notDetermined
+    case undefined
     case refused
     case accepted
 }

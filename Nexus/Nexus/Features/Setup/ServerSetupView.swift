@@ -1,3 +1,4 @@
+import OSLog
 import SwiftUI
 
 struct ServerSetupView: View {
@@ -92,13 +93,22 @@ struct ServerSetupView: View {
                     }
 
                     Button("Démarrer le serveur") {
-                        // TODO: Check si le port actuel marche
-                        if (true) {
-                            withAnimation(.smooth) {
-                                errorMessage = "Le port est déjà utilisé."
+                        Task {
+                            // TODO: Vérifier si le port est disponible
+                            if true {
+                                withAnimation(.smooth) {
+                                    errorMessage = "Le port est déjà utilisé."
+                                }
+
+                                return
                             }
-                        } else {
+                            
                             settings.accountType = .server
+                            
+                            try? await NotificationManager.shared
+                                .requestAuthorization()
+                            await settings.refreshNotificationsStatus()
+
                         }
                     }
                     .buttonStyle(.borderedProminent)
