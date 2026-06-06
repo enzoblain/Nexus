@@ -2,6 +2,8 @@ import SwiftUI
 
 struct ServerSetupView: View {
     let onBack: () -> Void
+    
+    @EnvironmentObject private var settings: AppSettings
 
     @State private var port = "8080"
     @State private var errorMessage: String?
@@ -95,7 +97,9 @@ struct ServerSetupView: View {
                             withAnimation(.smooth) {
                                 errorMessage = "Le port est déjà utilisé."
                             }
-                        } else {}
+                        } else {
+                            settings.accountType = .server
+                        }
                     }
                     .buttonStyle(.borderedProminent)
                     .disabled(port.isEmpty || errorMessage != nil)

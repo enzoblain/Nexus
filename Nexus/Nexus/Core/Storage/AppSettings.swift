@@ -4,13 +4,13 @@ import UserNotifications
 
 final class AppSettings: ObservableObject {
     @AppStorage("account_type")
-    private var rawAccountType = AccountType.server.rawValue
+    private var rawAccountType = AccountType.undefined.rawValue
 
     @Published
     private(set) var notificationsStatus: NotificationsStatus = .notDetermined
 
     var accountType: AccountType {
-        get { AccountType(rawValue: rawAccountType) ?? .server }
+        get { AccountType(rawValue: rawAccountType) ?? .undefined }
         set { rawAccountType = newValue.rawValue }
     }
 

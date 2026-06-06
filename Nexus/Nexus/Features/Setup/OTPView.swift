@@ -3,6 +3,8 @@ import SwiftUI
 struct OTPView: View {
     let onBack: () -> Void
 
+    @EnvironmentObject private var settings: AppSettings
+    
     @State private var code = ""
     @State private var errorMessage: String?
     @State private var isLoading = false
@@ -124,6 +126,8 @@ struct OTPView: View {
                                 isLoading = false
 
                                 if isOTPValid {
+                                    settings.accountType = .client
+                                    
                                     withAnimation(.smooth) {
                                         showHome = true
                                     }

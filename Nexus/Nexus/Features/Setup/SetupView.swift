@@ -19,6 +19,10 @@ struct SetupView: View {
                         selectedAccountType = nil
                     }
                 }
+                
+            case .undefined:
+                // Unreachable
+                EmptyView()
 
             case nil:
                 roleSelectionView

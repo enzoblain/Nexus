@@ -1,10 +1,15 @@
 import SwiftUI
 
 struct RootView: View {
+    @EnvironmentObject private var settings: AppSettings
+
     var body: some View {
         NavigationStack {
-            SetupView()
-            // HomeView()
+            if settings.accountType == .undefined {
+                SetupView()
+            } else {
+                HomeView()
+            }
         }
     }
 }
