@@ -9,20 +9,21 @@ struct BackButton: View {
                 Label("Retour", systemImage: "chevron.left")
                     .padding(.horizontal, 12)
                     .padding(.vertical, 8)
+                    .frame(minWidth: 100)
+                    .glassEffect(
+                        .regular,
+                        in: .capsule
+                    )
+                    .overlay {
+                        Capsule()
+                            .strokeBorder(
+                                .white.opacity(0.15),
+                                lineWidth: 1
+                            )
+                    }
+                    .contentShape(Capsule())
             }
             .buttonStyle(.plain)
-            .glassEffect(
-                .regular,
-                in: .capsule
-            )
-            .overlay {
-                Capsule()
-                    .strokeBorder(
-                        .white.opacity(0.15),
-                        lineWidth: 1
-                    )
-            }
-            .containerShape(Rectangle())
 
             #if os(macOS)
             .onHover { hovering in
@@ -37,4 +38,9 @@ struct BackButton: View {
             Spacer()
         }
     }
+}
+
+#Preview {
+    BackButton { }
+        .padding()
 }

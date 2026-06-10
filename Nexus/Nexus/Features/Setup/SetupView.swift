@@ -1,96 +1,67 @@
 import SwiftUI
 
 struct SetupView: View {
-    @State private var selectedAccountType: AccountType?
+    @State private var step: SetupStep = .roleSelection
+    @State private var serverAddress = ""
 
     var body: some View {
-        Group {
-            switch selectedAccountType {
-            case .server:
-                ServerSetupView {
-                    withAnimation(.smooth) {
-                        selectedAccountType = nil
-                    }
-                }
-
-            case .client:
-                ClientSetupView {
-                    withAnimation(.smooth) {
-                        selectedAccountType = nil
-                    }
-                }
-                
-            case .undefined:
-                // Unreachable
-                EmptyView()
-
-            case nil:
-                roleSelectionView
-            }
-        }
-        .animation(.smooth, value: selectedAccountType)
-    }
-
-    private var roleSelectionView: some View {
         ZStack {
             Color(nsColor: .windowBackgroundColor)
                 .ignoresSafeArea()
 
-            VStack {
-                Spacer()
-
-                VStack(spacing: 32) {
-                    Image(systemName: "network")
-                        .font(.system(size: 60))
-                        .foregroundStyle(.primary)
-
-                    VStack(spacing: 8) {
-                        Text("Bienvenue sur Nexus")
-                            .font(.largeTitle)
-                            .fontWeight(.semibold)
-
-                        Text(
-                            "Choisissez le rôle de cet appareil dans votre réseau."
-                        )
-                        .foregroundStyle(.secondary)
-                        .multilineTextAlignment(.center)
-                    }
-
-                    VStack(spacing: 16) {
-                        #if os(macOS)
-                        RoleCard(
-                            icon: "server.rack",
-                            title: "Serveur",
-                            description:
-                                "Stocke les données et les rend disponibles aux appareils autorisés."
-                        ) {
-                            withAnimation(.smooth) {
-                                selectedAccountType = .server
-                            }
-                        }
-
-                        Divider()
-                            .padding(.horizontal, 20)
-                        #endif
-
-                        RoleCard(
-                            icon: "desktopcomputer",
-                            title: "Client",
-                            description:
-                                "Connectez cet appareil à un serveur Nexus."
-                        ) {
-                            withAnimation(.smooth) {
-                                selectedAccountType = .client
-                            }
-                        }
-                    }
-                }
-                .padding(32)
-                .frame(maxWidth: 600)
-
-                Spacer()
-            }
+            content
+                .frame(width: 700, height: 520)
+                .glassEffect(
+                    .regular,
+                    in: .rect(cornerRadius: 36)
+                )
         }
-        .transition(.opacity.combined(with: .scale))
+        .animation(.smooth(duration: 0.4), value: step)
     }
+
+    @ViewBuilder
+    private var content: some View {
+        switch step {
+        case .roleSelection:
+            RoleSelectionView(
+                onServerSelected: {
+                    step = .serverSetup
+                },
+                onClientSelected: {
+                    step = .clientAddress
+                }
+            )
+            .transition(.scale.combined(with: .opacity))
+
+        case .serverSetup:
+            ServerSetupView {
+                step = .roleSelection
+            }
+            .transition(.scale.combined(with: .opacity))
+
+        case .clientAddress:
+            ClientAddressView(
+                onBack: {
+                    step = .roleSelection
+                },
+                onContinue: { address in
+                    serverAddress = address
+                    step = .clientOTP
+                }
+            )
+            .transition(.scale.combined(with: .opacity))
+
+        case .clientOTP:
+            ClientOTPView(
+                onBack: {
+                    step = .clientAddress
+                }
+            )
+            .transition(.scale.combined(with: .opacity))
+        }
+    }
+}
+
+#Preview {
+    SetupView()
 }

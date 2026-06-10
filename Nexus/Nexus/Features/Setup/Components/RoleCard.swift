@@ -44,3 +44,13 @@ struct RoleCard: View {
         .glassEffect(.regular, in: .rect(cornerRadius: 20))
     }
 }
+
+#Preview {
+    RoleCard(
+        icon: "server.rack",
+        title: "Serveur",
+        description:
+            "Stocke les données et les rend disponibles aux appareils autorisés."
+    ) { }
+    .padding()
+}
