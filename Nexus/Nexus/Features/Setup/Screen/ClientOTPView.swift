@@ -7,11 +7,6 @@ struct ClientOTPView: View {
 
     @State private var code = ""
     @State private var errorMessage: String?
-    @State private var isLoading = false
-
-    private var isValid: Bool {
-        code.count == 6
-    }
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -37,46 +32,32 @@ struct ClientOTPView: View {
                     .multilineTextAlignment(.center)
                 }
 
-                TextField("123456", text: $code)
-                    .textFieldStyle(.plain)
-                    .multilineTextAlignment(.center)
-                    .font(
-                        .system(
-                            size: 28,
-                            weight: .medium,
-                            design: .monospaced
-                        )
-                    )
-                    .padding()
-                    .frame(width: 220)
-                    .background(.regularMaterial)
-                    .clipShape(
-                        RoundedRectangle(
-                            cornerRadius: 16,
-                            style: .continuous
-                        )
-                    )
-                    .overlay {
-                        RoundedRectangle(
-                            cornerRadius: 16,
-                            style: .continuous
-                        )
-                        .stroke(
-                            errorMessage == nil ? .clear : .red,
-                            lineWidth: 1
-                        )
-                    }
-                    .onChange(of: code) { _, newValue in
-                        code = String(
-                            newValue
-                                .filter(\.isNumber)
-                                .prefix(6)
-                        )
+                VerificationField(
+                    value: $code,
+                    verify: { code in
+                        try? await Task.sleep(for: .seconds(2))
 
-                        withAnimation(.smooth) {
-                            errorMessage = nil
+                        // TODO: Vérification réelle auprès du serveur
+                        let isOTPValid = true
+
+                        await MainActor.run {
+                            if isOTPValid {
+                                settings.accountType = .client
+                            } else {
+                                withAnimation(.smooth) {
+                                    errorMessage = "Code OTP invalide."
+                                }
+                            }
                         }
+
+                        return isOTPValid ? .valid : .invalid
                     }
+                )
+                .onChange(of: code) { _, _ in
+                    withAnimation(.smooth) {
+                        errorMessage = nil
+                    }
+                }
 
                 if let errorMessage {
                     HStack(spacing: 10) {
@@ -107,47 +88,6 @@ struct ClientOTPView: View {
                         )
                     }
                 }
-
-                Button {
-                    isLoading = true
-
-                    Task {
-                        try? await Task.sleep(for: .seconds(2))
-
-                        let isOTPValid = true
-
-                        await MainActor.run {
-                            isLoading = false
-
-                            if isOTPValid {
-                                settings.accountType = .client
-                            } else {
-                                withAnimation(.smooth) {
-                                    errorMessage = "Code OTP invalide."
-                                }
-                            }
-                        }
-                    }
-                } label: {
-                    if isLoading {
-                        ProgressView()
-                            .controlSize(.small)
-                    } else {
-                        Text("Continuer")
-                    }
-                }
-                .buttonStyle(.borderedProminent)
-                .disabled(!isValid || isLoading)
-
-                #if os(macOS)
-                .onHover { hovering in
-                    if hovering {
-                        NSCursor.pointingHand.push()
-                    } else {
-                        NSCursor.pop()
-                    }
-                }
-                #endif
             }
             .frame(maxWidth: .infinity)
 

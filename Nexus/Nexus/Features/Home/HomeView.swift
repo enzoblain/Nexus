@@ -37,5 +37,4 @@ struct HomeView: View {
         HomeView()
             .environmentObject(AppSettings())
     }
-}s
-
+}
